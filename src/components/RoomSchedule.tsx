@@ -1,6 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import type { Room, Booking } from '@/types/booking'
+import { deleteBookingAction } from '@/lib/actions'
+import EditBookingModal from './EditBookingModal'
 
 interface RoomScheduleProps {
   rooms: Room[]
@@ -8,12 +11,19 @@ interface RoomScheduleProps {
 }
 
 export default function RoomSchedule({ rooms, bookings }: RoomScheduleProps) {
+  const [editingBooking, setEditingBooking] = useState<Booking | null>(null)
+
   function formatTime(time: string): string {
     return time.substring(0, 5)
   }
 
   function getBookingsForRoom(roomId: string): Booking[] {
     return bookings.filter((b) => b.room_id === roomId)
+  }
+
+  const handleDelete = async (booking: Booking) => {
+    if (!window.confirm(`「${booking.title}」の予約をキャンセルしますか？`)) return
+    await deleteBookingAction(booking.id)
   }
 
   return (
@@ -40,6 +50,22 @@ export default function RoomSchedule({ rooms, bookings }: RoomScheduleProps) {
                       </div>
                       <div className="text-gray-700">{booking.title}</div>
                       <div className="text-gray-500 text-xs">{booking.reserver_name}</div>
+                      <div className="flex gap-2 mt-1">
+                        <button
+                          type="button"
+                          onClick={() => setEditingBooking(booking)}
+                          className="text-xs text-blue-600 hover:underline"
+                        >
+                          変更
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(booking)}
+                          className="text-xs text-red-600 hover:underline"
+                        >
+                          キャンセル
+                        </button>
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -47,6 +73,14 @@ export default function RoomSchedule({ rooms, bookings }: RoomScheduleProps) {
             </div>
           )
         })
+      )}
+
+      {editingBooking && (
+        <EditBookingModal
+          booking={editingBooking}
+          rooms={rooms}
+          onClose={() => setEditingBooking(null)}
+        />
       )}
     </div>
   )
