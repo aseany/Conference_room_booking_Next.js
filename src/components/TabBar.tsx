@@ -1,11 +1,18 @@
+// Next.jsのApp Routerが特別に解釈する「ディレクティブ（指示文）」。ファイルの一番先頭に書く必要がある。プロジェクト固有のコードではなく、Next.js（React Server Components）が定めた予約構文。
 'use client'
 
+// linkはNext.jsが提供する組み込みコンポーネント（プロジェクト独自コードではない）。HTMLの <a> タグの代わりに使う、ページ遷移用のコンポーネント。
 import Link from 'next/link'
+// 名前付きインポート
+// usePathnameは	Next.jsが提供する組み込みReact Hook。現在表示中のURLのパス部分（クエリを除く、例：/new）を返す。
+// useSearchParams	Next.jsが提供する組み込みReact Hook。現在のURLのクエリパラメータ（?date=2026-09-08など）を読み取るためのオブジェクトを返す。
 import { usePathname, useSearchParams } from 'next/navigation'
-
+// デフォルトエクスポート
 export default function TabBar() {
   const pathname = usePathname()
+  // console.log(pathname,'pathname')
   const searchParams = useSearchParams()
+  // console.log(searchParams ,'searchParams')
 
   const withDate = (href: string) => {
     const qs = searchParams.toString()
