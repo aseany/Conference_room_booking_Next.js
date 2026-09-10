@@ -2,13 +2,14 @@
 // useRouterページ遷移を実行するための Hook。router.push(URL) を呼ぶと、そのURLに画面遷移
 // usePathname 現在のURLのパス部分(クエリを除く。例: /new や /schedule)を返す Hook
 import { useRouter, usePathname } from 'next/navigation'
+// @ は src/ を指すエイリアス(tsconfig.json で設定されている省略記法)。
 import { formatWeekday, todayISO } from '@/utils/datetime'
 
 interface DateSelectProps {
   value: string
   label?: string
 }
-
+// ここから
 export default function DateSelect({ value, label = '日付' }: DateSelectProps) {
   const router = useRouter()
   const pathname = usePathname()
