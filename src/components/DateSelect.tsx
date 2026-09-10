@@ -1,5 +1,6 @@
 'use client'
-
+// useRouterページ遷移を実行するための Hook。router.push(URL) を呼ぶと、そのURLに画面遷移
+// usePathname 現在のURLのパス部分(クエリを除く。例: /new や /schedule)を返す Hook
 import { useRouter, usePathname } from 'next/navigation'
 import { formatWeekday, todayISO } from '@/utils/datetime'
 

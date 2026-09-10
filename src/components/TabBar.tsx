@@ -1,4 +1,5 @@
 // Next.jsのApp Routerが特別に解釈する「ディレクティブ（指示文）」。ファイルの一番先頭に書く必要がある。プロジェクト固有のコードではなく、Next.js（React Server Components）が定めた予約構文。
+// ブラウザ側の機能(Hook・イベントハンドラ・状態)を使うために、use client ディレクティブを書く。
 'use client'
 
 // linkはNext.jsが提供する組み込みコンポーネント（プロジェクト独自コードではない）。HTMLの <a> タグの代わりに使う、ページ遷移用のコンポーネント。
@@ -16,6 +17,7 @@ export default function TabBar() {
 
   const withDate = (href: string) => {
     const qs = searchParams.toString()
+    // console.log(qs ,'qsクエリパラメータ')
     return qs ? `${href}?${qs}` : href
   }
 

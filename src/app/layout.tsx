@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
+// ↓よくわからん
 import { Suspense } from 'react'
 import TabBar from '@/components/TabBar'
 import './globals.css'
 
+// export const metadata	Next.jsのApp Router規約における予約された変数名。layout.tsxやpage.tsxからmetadataという名前でexportすると、Next.jsが自動的に読み取る。
+// : Metadata	layout.tsx:1でimportした型注釈。titleなどのプロパティ名・型が正しいかをTypeScriptにチェックさせる。
+// layout.tsxはこのアプリ全体（ルート/以下すべて）に適用されるレイアウトなので、ここで指定したmetadataは、個別のページで上書きされない限りアプリ全体の共通タイトルとして使われます。
 export const metadata: Metadata = {
   title: 'ver4（Next.js版）',
 }
@@ -13,6 +17,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <div className="p-8 max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold mb-8">ver4（Next.js版）</h1>
+          {/*Suspense Reactの機能で、中の子コンポーネント(TabBar)がまだ準備できていない(データ取得中・非同期の初期化中など)間、代わりのUIを表示できるようにする仕組 */}
           <Suspense><TabBar /></Suspense>
           {children}
         </div>

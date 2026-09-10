@@ -1,3 +1,4 @@
+// App Routerでは、ページが見つからない場合、自動的にこのファイルが表示される。
 import Link from 'next/link'
 
 export default function NotFound() {
