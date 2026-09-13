@@ -28,7 +28,7 @@ export default function TabBar() {
 
   return (
     <div className="flex border-b mb-6">
-      <Link href={withDate('/new')} className={className('/new')}>予約を作成</Link>
+      <Link href={withDate('/new')} className={className('/new')}>予約を作成！！</Link>
       <Link href={withDate('/schedule')} className={className('/schedule')}>スケジュール</Link>
     </div>
   )

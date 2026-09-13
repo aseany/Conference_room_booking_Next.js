@@ -13,7 +13,13 @@ interface DateSelectProps {
 export default function DateSelect({ value, label = '日付' }: DateSelectProps) {
   const router = useRouter()
   const pathname = usePathname()
-
+  // ↓分割代入を使わずに書くと
+  // export default function DateSelect(props: DateSelectProps) {
+  //   const value = props.value
+  //   const label = props.label === undefined ? '日付' : props.label
+  //   ...
+  // }
+  
   const onChange = (date: string) => router.push(`${pathname}?date=${date}`)
 
   return (
