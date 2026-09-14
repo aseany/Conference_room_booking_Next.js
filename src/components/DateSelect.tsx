@@ -5,11 +5,11 @@ import { useRouter, usePathname } from 'next/navigation'
 // @ は src/ を指すエイリアス(tsconfig.json で設定されている省略記法)。
 import { formatWeekday, todayISO } from '@/utils/datetime'
 
+// propsの型定義
 interface DateSelectProps {
   value: string
   label?: string
 }
-// ここから
 export default function DateSelect({ value, label = '日付' }: DateSelectProps) {
   const router = useRouter()
   const pathname = usePathname()
